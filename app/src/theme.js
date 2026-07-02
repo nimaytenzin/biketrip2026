@@ -41,6 +41,35 @@ export function classLabel(k) {
   return CLASS_LABELS[k] || k
 }
 
+// Rider-facing surface mix: raw dataset classes grouped into three buckets.
+// Ordinal single-hue ramp for the paved tiers; neutral gray reads "dirt".
+export const SURFACE_GROUPS = [
+  {
+    label: 'Highway · paved',
+    color: '#1c5cab',
+    classes: ['Asian Highway', 'Primary Highway', 'Secondary National H'],
+  },
+  {
+    label: 'District & town · paved',
+    color: '#6da7ec',
+    classes: ['Dzongkhag Road', 'Thromdee Roads'],
+  },
+  {
+    label: 'Dirt track · unpaved',
+    color: '#c3c2b7',
+    classes: ['Farm Road', 'Access Road'],
+  },
+]
+
+export function surfaceMix(classKm) {
+  const mix = []
+  for (const g of SURFACE_GROUPS) {
+    const km = g.classes.reduce((s, c) => s + (classKm[c] || 0), 0)
+    if (km > 0) mix.push({ label: g.label, color: g.color, km })
+  }
+  return mix
+}
+
 export function fmtHours(h) {
   const hh = Math.floor(h)
   const mm = Math.round((h - hh) * 60)
