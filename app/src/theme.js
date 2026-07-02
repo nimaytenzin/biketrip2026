@@ -27,7 +27,13 @@ export const CLASS_RAMP = {
 }
 
 export const CLASS_LABELS = {
-  'Secondary National H': 'Secondary National Hwy',
+  'Asian Highway': 'Asian Highway',
+  'Primary Highway': 'Highway',
+  'Secondary National H': 'Secondary highway',
+  'Dzongkhag Road': 'District road',
+  'Thromdee Roads': 'Town streets',
+  'Access Road': 'Access track',
+  'Farm Road': 'Farm track · off-road',
   '(gap in data)': 'Gap in road data',
 }
 

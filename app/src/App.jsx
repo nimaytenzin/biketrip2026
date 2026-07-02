@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import TourMap from './TourMap'
 import ClassBar from './ClassBar'
-import { DAY_COLORS, classLabel, fmtHours, visibleClassKm } from './theme'
+import { DAY_COLORS, fmtHours, visibleClassKm } from './theme'
 import { DAY_FACTS } from './dayFacts'
 import stats from './tourStats.json'
 
@@ -21,7 +21,6 @@ const SECTIONS = ['intro', ...stats.map((d) => d.day), 'end']
 function DayStory({ d }) {
   const color = DAY_COLORS[d.day - 1]
   const classKm = visibleClassKm(d.class_km)
-  const topClass = Object.entries(classKm)[0]
   const pois = d.markers.filter((m) => m.kind === 'poi').map((m) => m.name)
   return (
     <article className="card day-story" style={{ '--day-color': color }}>
@@ -42,9 +41,6 @@ function DayStory({ d }) {
       </div>
 
       <ClassBar classKm={classKm} />
-      <p className="day-class-note">
-        Mostly {classLabel(topClass[0]).toLowerCase()} ({Math.round(topClass[1])} km)
-      </p>
 
       {pois.length > 0 && (
         <p className="day-pois">
