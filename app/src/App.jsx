@@ -56,16 +56,38 @@ function DayStory({ d }) {
       </p>
 
       {DAY_FACTS[d.day] && (
-        <div className="day-facts">
-          <span className="label">Worth knowing</span>
+        <details className="day-facts">
+          <summary>Worth knowing</summary>
           <ul>
             {DAY_FACTS[d.day].map((f) => (
               <li key={f}>{f}</li>
             ))}
           </ul>
-        </div>
+        </details>
       )}
     </article>
+  )
+}
+
+function StoryNav({ active, scrollTo }) {
+  const idx = SECTIONS.indexOf(active)
+  return (
+    <div className="story-nav">
+      <button
+        aria-label="Previous section"
+        disabled={idx <= 0}
+        onClick={() => scrollTo(SECTIONS[idx - 1])}
+      >
+        ↑
+      </button>
+      <button
+        aria-label="Next section"
+        disabled={idx >= SECTIONS.length - 1}
+        onClick={() => scrollTo(SECTIONS[idx + 1])}
+      >
+        ↓
+      </button>
+    </div>
   )
 }
 
@@ -108,6 +130,8 @@ export default function App() {
       <div className="story-map">
         <TourMap routes={routes} selected={selected} onDayClick={scrollTo} />
       </div>
+
+      <StoryNav active={active} scrollTo={scrollTo} />
 
       <nav className="rail" aria-label="Tour progress">
         {SECTIONS.map((key) => (

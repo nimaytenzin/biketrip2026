@@ -68,9 +68,6 @@ export default function TourMap({ routes, selected, onDayClick }) {
     [routes],
   )
   const markerRenderer = useMemo(() => L.canvas({ pane: 'tour-markers' }), [])
-  // on phones the story scroll drives the camera; a draggable backdrop map
-  // would swallow touch scrolling
-  const isMobile = window.innerWidth < 720
 
   return (
     <MapContainer
@@ -81,8 +78,6 @@ export default function TourMap({ routes, selected, onDayClick }) {
       zoomControl={false}
       attributionControl={false}
       scrollWheelZoom={false}
-      dragging={!isMobile}
-      touchZoom={!isMobile}
     >
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
