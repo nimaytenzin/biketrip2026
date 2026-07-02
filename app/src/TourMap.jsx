@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from 'react'
 import { MapContainer, TileLayer, Polyline, CircleMarker, Tooltip, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import RoadNetworkLayer from './RoadNetworkLayer'
-import DayPanel from './DayPanel'
 import { DAY_COLORS } from './theme'
 import stats from './tourStats.json'
 
@@ -27,13 +26,17 @@ function MarkerPane({ children }) {
   return ready ? children : null
 }
 
+// Fly to the active day's route, keeping it clear of the story card:
+// desktop cards sit on the right, mobile cards rise from the bottom.
 function FitToSelection({ routes, selected }) {
   const map = useMap()
   useEffect(() => {
     if (!routes) return
-    const feats = selected == null
-      ? routes.features
-      : routes.features.filter((f) => f.properties.day === selected)
+    const feats =
+      selected == null
+        ? routes.features
+        : routes.features.filter((f) => f.properties.day === selected)
+    if (!feats.length) return
     let minLat = 90, maxLat = -90, minLng = 180, maxLng = -180
     for (const f of feats) {
       for (const [lng, lat] of f.geometry.coordinates) {
@@ -43,74 +46,87 @@ function FitToSelection({ routes, selected }) {
         if (lng > maxLng) maxLng = lng
       }
     }
+    const mobile = window.innerWidth < 720
     map.flyToBounds(
       [[minLat, minLng], [maxLat, maxLng]],
-      { padding: [40, 40], duration: 0.8 },
+      {
+        paddingTopLeft: mobile ? [24, 90] : [60, 60],
+        paddingBottomRight: mobile
+          ? [24, Math.round(window.innerHeight * 0.46)]
+          : [Math.min(window.innerWidth * 0.42, 540), 60],
+        duration: 1.1,
+        easeLinearity: 0.2,
+      },
     )
   }, [map, routes, selected])
   return null
 }
 
-export default function TourMap({ routes, selected, onSelect }) {
+export default function TourMap({ routes, selected, onDayClick }) {
   const days = useMemo(
     () => (routes ? [...routes.features].sort((a, b) => a.properties.day - b.properties.day) : []),
     [routes],
   )
   const markerRenderer = useMemo(() => L.canvas({ pane: 'tour-markers' }), [])
+  // on phones the story scroll drives the camera; a draggable backdrop map
+  // would swallow touch scrolling
+  const isMobile = window.innerWidth < 720
 
   return (
-    <div className="map-wrap">
-      <MapContainer
-        center={[27.3, 90.5]}
-        zoom={8}
-        className="map"
-        preferCanvas
-        zoomControl={false}
-        attributionControl={false}
-      >
-        <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          subdomains="abcd"
-          maxZoom={18}
-        />
-        <RoadNetworkLayer />
-        <FitToSelection routes={routes} selected={selected} />
+    <MapContainer
+      center={[27.3, 90.5]}
+      zoom={8}
+      className="map"
+      preferCanvas
+      zoomControl={false}
+      attributionControl={false}
+      scrollWheelZoom={false}
+      dragging={!isMobile}
+      touchZoom={!isMobile}
+    >
+      <TileLayer
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        subdomains="abcd"
+        maxZoom={18}
+      />
+      <RoadNetworkLayer />
+      <FitToSelection routes={routes} selected={selected} />
 
-        {/* white casings first so every colored line sits on a surface ring */}
-        {days.map((f) => {
-          const d = f.properties.day
-          const active = selected == null || selected === d
-          return (
-            <Polyline
-              key={`case-${d}`}
-              positions={dayPositions(f)}
-              pathOptions={{ color: '#ffffff', weight: 6, opacity: active ? 0.9 : 0 }}
-            />
-          )
-        })}
-        {days.map((f) => {
-          const d = f.properties.day
-          const active = selected == null || selected === d
-          return (
-            <Polyline
-              key={`route-${d}`}
-              positions={dayPositions(f)}
-              eventHandlers={{ click: () => onSelect(selected === d ? null : d) }}
-              pathOptions={{
-                color: DAY_COLORS[d - 1],
-                weight: selected === d ? 4.5 : 3,
-                opacity: active ? 0.95 : 0.15,
-              }}
-            >
-              <Tooltip sticky>
-                Day {d} — {f.properties.start} → {f.properties.end} ·{' '}
-                {f.properties.distance_km} km
-              </Tooltip>
-            </Polyline>
-          )
-        })}
+      {/* white casings first so every colored line sits on a surface ring */}
+      {days.map((f) => {
+        const d = f.properties.day
+        const active = selected == null || selected === d
+        return (
+          <Polyline
+            key={`case-${d}`}
+            positions={dayPositions(f)}
+            pathOptions={{ color: '#ffffff', weight: 7, opacity: active ? 0.9 : 0 }}
+          />
+        )
+      })}
+      {days.map((f) => {
+        const d = f.properties.day
+        const active = selected == null || selected === d
+        return (
+          <Polyline
+            key={`route-${d}`}
+            positions={dayPositions(f)}
+            eventHandlers={{ click: () => onDayClick?.(d) }}
+            pathOptions={{
+              color: DAY_COLORS[d - 1],
+              weight: selected === d ? 5 : 3.5,
+              opacity: active ? 0.95 : 0.12,
+            }}
+          >
+            <Tooltip sticky>
+              Day {d} — {f.properties.start} → {f.properties.end} ·{' '}
+              {f.properties.distance_km} km
+            </Tooltip>
+          </Polyline>
+        )
+      })}
 
-        <MarkerPane>
+      <MarkerPane>
         {stats.map((d) => {
           const active = selected == null || selected === d.day
           if (!active) return null
@@ -148,39 +164,13 @@ export default function TourMap({ routes, selected, onSelect }) {
                       <strong>{m.name}</strong>
                       <br />
                       Day {d.day} · {m.kind === 'poi' ? 'highlight' : m.kind}
-                      {m.off_km > 1 ? ' · position approximate' : ''}
                     </Tooltip>
                   )}
                 </CircleMarker>
               )
             })
         })}
-        </MarkerPane>
-      </MapContainer>
-
-      {selected != null && (
-        <DayPanel selected={selected} onClose={() => onSelect(null)} />
-      )}
-
-      <div className="map-legend" role="tablist" aria-label="Highlight a day">
-        <button
-          className={`day-chip ${selected == null ? 'is-active' : ''}`}
-          onClick={() => onSelect(null)}
-        >
-          All days
-        </button>
-        {stats.map((d) => (
-          <button
-            key={d.day}
-            className={`day-chip ${selected === d.day ? 'is-active' : ''}`}
-            style={{ '--chip-color': DAY_COLORS[d.day - 1] }}
-            onClick={() => onSelect(selected === d.day ? null : d.day)}
-          >
-            <span className="chip-swatch" style={{ background: DAY_COLORS[d.day - 1] }} />
-            Day {d.day}
-          </button>
-        ))}
-      </div>
-    </div>
+      </MarkerPane>
+    </MapContainer>
   )
 }
