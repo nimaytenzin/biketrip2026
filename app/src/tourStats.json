@@ -1,0 +1,448 @@
+[
+ {
+  "day": 1,
+  "start": "Thimphu",
+  "end": "Bumthang",
+  "halt": "Swiss Guest House",
+  "claimed": "200 km",
+  "routed_km": 244.7,
+  "est_hours": 7.0,
+  "complete": true,
+  "legs": [
+   {
+    "frm": "Thimphu",
+    "to": "Trongsa Dzong",
+    "km": 179.4
+   },
+   {
+    "frm": "Trongsa Dzong",
+    "to": "Bumthang (Jakar)",
+    "km": 65.3
+   }
+  ],
+  "markers": [
+   {
+    "name": "Thimphu",
+    "lon": 89.63391,
+    "lat": 27.47118,
+    "kind": "start"
+   },
+   {
+    "name": "Trongsa Dzong",
+    "lon": 90.50666,
+    "lat": 27.49905,
+    "kind": "via"
+   },
+   {
+    "name": "Bumthang (Jakar)",
+    "lon": 90.75257,
+    "lat": 27.54914,
+    "kind": "end"
+   },
+   {
+    "name": "Dochula Pass",
+    "lon": 89.74713,
+    "lat": 27.49023,
+    "kind": "poi",
+    "off_km": 0.1
+   },
+   {
+    "name": "Pele La Pass",
+    "lon": 90.1995,
+    "lat": 27.5312,
+    "kind": "poi",
+    "off_km": 0.3
+   },
+   {
+    "name": "Yotong La",
+    "lon": 90.63921,
+    "lat": 27.50183,
+    "kind": "poi",
+    "off_km": 3.9
+   },
+   {
+    "name": "Red Panda Brewery (Chumey)",
+    "lon": 90.68827,
+    "lat": 27.48763,
+    "kind": "poi",
+    "off_km": 0.9
+   }
+  ],
+  "class_km": {
+   "Primary Highway": 211.9,
+   "Secondary National H": 12.2,
+   "Access Road": 5.6,
+   "Farm Road": 1.7,
+   "Thromdee Roads": 0.5
+  },
+  "surface_km": {
+   "Unknown": 219.7,
+   "Metalled": 12.2,
+   "Earthen": 0.1
+  }
+ },
+ {
+  "day": 2,
+  "start": "Bumthang",
+  "end": "Takila",
+  "halt": "Takila Guest House",
+  "claimed": "247 km",
+  "routed_km": 236.3,
+  "est_hours": 7.3,
+  "complete": false,
+  "legs": [
+   {
+    "frm": "Bumthang (Jakar)",
+    "to": "Mongar side (Kuri Zampa)",
+    "km": 147.3
+   },
+   {
+    "frm": "Mongar side (Kuri Zampa)",
+    "to": "Takila (Guru Statue)",
+    "km": 87.3
+   },
+   {
+    "frm": "road network",
+    "to": "Takila (Guru Statue)",
+    "km": 1.7,
+    "gap": true
+   }
+  ],
+  "markers": [
+   {
+    "name": "Bumthang (Jakar)",
+    "lon": 90.75257,
+    "lat": 27.54914,
+    "kind": "start"
+   },
+   {
+    "name": "Mongar side (Kuri Zampa)",
+    "lon": 91.20165,
+    "lat": 27.22107,
+    "kind": "via"
+   },
+   {
+    "name": "Takila (Guru Statue)",
+    "lon": 91.13,
+    "lat": 27.6,
+    "kind": "end"
+   },
+   {
+    "name": "Thrumshing La",
+    "lon": 91.0321,
+    "lat": 27.35911,
+    "kind": "poi",
+    "off_km": 0.2
+   },
+   {
+    "name": "Sengor",
+    "lon": 91.12101,
+    "lat": 27.34496,
+    "kind": "poi",
+    "off_km": 0.1
+   }
+  ],
+  "class_km": {
+   "Primary Highway": 138.0,
+   "Secondary National H": 64.9,
+   "Farm Road": 10.9,
+   "Dzongkhag Road": 10.4,
+   "(gap in data)": 1.7
+  },
+  "surface_km": {
+   "Unknown": 163.2,
+   "Metalled": 60.4,
+   "(gap in data)": 1.7,
+   "Partially Gravelled": 0.6,
+   "Earthen": 0.1,
+   "Unmetalled": 0.0
+  }
+ },
+ {
+  "day": 3,
+  "start": "Takila",
+  "end": "Trashiyangtse",
+  "halt": "Camping at Bumdeling",
+  "claimed": "185 km",
+  "routed_km": 199.8,
+  "est_hours": 7.5,
+  "complete": false,
+  "legs": [
+   {
+    "frm": "Takila (Guru Statue)",
+    "to": "road network",
+    "km": 1.7,
+    "gap": true
+   },
+   {
+    "frm": "Takila (Guru Statue)",
+    "to": "Lhuentse Dzong",
+    "km": 23.0
+   },
+   {
+    "frm": "Lhuentse Dzong",
+    "to": "Mongar Town",
+    "km": 71.5
+   },
+   {
+    "frm": "Mongar Town",
+    "to": "Trashiyangtse",
+    "km": 101.5
+   },
+   {
+    "frm": "road network",
+    "to": "Trashiyangtse",
+    "km": 2.1,
+    "gap": true
+   }
+  ],
+  "markers": [
+   {
+    "name": "Takila (Guru Statue)",
+    "lon": 91.13,
+    "lat": 27.6,
+    "kind": "start"
+   },
+   {
+    "name": "Lhuentse Dzong",
+    "lon": 91.183,
+    "lat": 27.6683,
+    "kind": "via"
+   },
+   {
+    "name": "Mongar Town",
+    "lon": 91.23969,
+    "lat": 27.27536,
+    "kind": "via"
+   },
+   {
+    "name": "Trashiyangtse",
+    "lon": 91.498,
+    "lat": 27.6116,
+    "kind": "end"
+   }
+  ],
+  "class_km": {
+   "Secondary National H": 60.6,
+   "Primary Highway": 49.0,
+   "Farm Road": 43.7,
+   "Dzongkhag Road": 34.9,
+   "(gap in data)": 3.8,
+   "Unknown": 2.2,
+   "Thromdee Roads": 0.5
+  },
+  "surface_km": {
+   "Unknown": 113.5,
+   "Metalled": 71.8,
+   "Partially Gravelled": 5.7,
+   "(gap in data)": 3.8
+  }
+ },
+ {
+  "day": 4,
+  "start": "Trashiyangtse",
+  "end": "Panbang",
+  "halt": "Panbang Ecolodge",
+  "claimed": "274 km",
+  "routed_km": 347.0,
+  "est_hours": 12.0,
+  "complete": false,
+  "legs": [
+   {
+    "frm": "Trashiyangtse",
+    "to": "road network",
+    "km": 2.1,
+    "gap": true
+   },
+   {
+    "frm": "Trashiyangtse",
+    "to": "Pemagatshel New Dzong (Denchi)",
+    "km": 165.4
+   },
+   {
+    "frm": "Pemagatshel New Dzong (Denchi)",
+    "to": "Nganglam",
+    "km": 119.3
+   },
+   {
+    "frm": "Nganglam",
+    "to": "Panbang",
+    "km": 60.2
+   }
+  ],
+  "markers": [
+   {
+    "name": "Trashiyangtse",
+    "lon": 91.498,
+    "lat": 27.6116,
+    "kind": "start"
+   },
+   {
+    "name": "Pemagatshel New Dzong (Denchi)",
+    "lon": 91.4026,
+    "lat": 27.03887,
+    "kind": "via"
+   },
+   {
+    "name": "Nganglam",
+    "lon": 91.25,
+    "lat": 26.79,
+    "kind": "via"
+   },
+   {
+    "name": "Panbang",
+    "lon": 90.97422,
+    "lat": 26.86185,
+    "kind": "end"
+   }
+  ],
+  "class_km": {
+   "Secondary National H": 133.9,
+   "Primary Highway": 110.2,
+   "Unknown": 32.9,
+   "Dzongkhag Road": 31.6,
+   "Farm Road": 30.2,
+   "(gap in data)": 2.1
+  },
+  "surface_km": {
+   "Unknown": 245.7,
+   "Metalled": 58.7,
+   "Partially Gravelled": 32.6,
+   "(gap in data)": 2.1,
+   "Earthen": 1.7
+  }
+ },
+ {
+  "day": 5,
+  "start": "Panbang",
+  "end": "Tsirang",
+  "halt": "Hotel / Camping",
+  "claimed": null,
+  "routed_km": 249.0,
+  "est_hours": 8.0,
+  "complete": true,
+  "legs": [
+   {
+    "frm": "Panbang",
+    "to": "Gelephu",
+    "km": 162.4
+   },
+   {
+    "frm": "Gelephu",
+    "to": "Tsirang (Damphu)",
+    "km": 86.5
+   }
+  ],
+  "markers": [
+   {
+    "name": "Panbang",
+    "lon": 90.97422,
+    "lat": 26.86185,
+    "kind": "start"
+   },
+   {
+    "name": "Gelephu",
+    "lon": 90.48656,
+    "lat": 26.86992,
+    "kind": "via"
+   },
+   {
+    "name": "Tsirang (Damphu)",
+    "lon": 90.12424,
+    "lat": 27.00487,
+    "kind": "end"
+   },
+   {
+    "name": "Royal Manas National Park",
+    "lon": 90.93181,
+    "lat": 26.8495,
+    "kind": "poi",
+    "off_km": 2.5
+   }
+  ],
+  "class_km": {
+   "Primary Highway": 172.6,
+   "Unknown": 64.6,
+   "Farm Road": 6.1
+  },
+  "surface_km": {
+   "Unknown": 147.5,
+   "Metalled": 94.1,
+   "Earthen": 1.8
+  }
+ },
+ {
+  "day": 6,
+  "start": "Tsirang",
+  "end": "Thimphu",
+  "halt": "Home",
+  "claimed": null,
+  "routed_km": 153.1,
+  "est_hours": 4.3,
+  "complete": true,
+  "legs": [
+   {
+    "frm": "Tsirang (Damphu)",
+    "to": "Wangdue Phodrang",
+    "km": 90.0
+   },
+   {
+    "frm": "Wangdue Phodrang",
+    "to": "Thimphu",
+    "km": 63.0
+   }
+  ],
+  "markers": [
+   {
+    "name": "Tsirang (Damphu)",
+    "lon": 90.12424,
+    "lat": 27.00487,
+    "kind": "start"
+   },
+   {
+    "name": "Wangdue Phodrang",
+    "lon": 89.89922,
+    "lat": 27.48621,
+    "kind": "via"
+   },
+   {
+    "name": "Thimphu",
+    "lon": 89.63391,
+    "lat": 27.47118,
+    "kind": "end"
+   },
+   {
+    "name": "Wangdue Phodrang Dzong",
+    "lon": 89.89922,
+    "lat": 27.48621,
+    "kind": "poi",
+    "off_km": 0.2
+   },
+   {
+    "name": "Dochula Pass",
+    "lon": 89.74713,
+    "lat": 27.49023,
+    "kind": "poi",
+    "off_km": 0.1
+   },
+   {
+    "name": "Simtokha Dzong",
+    "lon": 89.66891,
+    "lat": 27.4447,
+    "kind": "poi",
+    "off_km": 0.4
+   }
+  ],
+  "class_km": {
+   "Primary Highway": 133.2,
+   "Access Road": 4.2,
+   "Farm Road": 2.1,
+   "Thromdee Roads": 0.6
+  },
+  "surface_km": {
+   "Unknown": 134.2,
+   "Metalled": 4.2,
+   "Earthen": 1.6
+  }
+ }
+]

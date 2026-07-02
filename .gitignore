@@ -1,0 +1,8 @@
+# raw GIS sources exceed GitHub's 100 MB file limit — regenerate with the
+# conversion steps in README.md
+_ags_Road Network of Bhutan.zip
+shp_src/
+
+node_modules/
+dist/
+*.log
