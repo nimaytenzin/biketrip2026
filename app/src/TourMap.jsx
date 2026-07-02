@@ -1,5 +1,6 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { MapContainer, TileLayer, Polyline, CircleMarker, Tooltip, useMap } from 'react-leaflet'
+import L from 'leaflet'
 import RoadNetworkLayer from './RoadNetworkLayer'
 import DayPanel from './DayPanel'
 import { DAY_COLORS } from './theme'
@@ -9,6 +10,21 @@ const HIDDEN_MARKERS = ['Kuri Zampa'] // routing constraint, not a real stop
 
 function dayPositions(feature) {
   return feature.geometry.coordinates.map(([lng, lat]) => [lat, lng])
+}
+
+// Markers get their own canvas in a pane above the route overlay pane, so
+// they always draw on top of the route lines (with preferCanvas, everything
+// in the default pane shares one canvas in insertion order).
+function MarkerPane({ children }) {
+  const map = useMap()
+  const [ready, setReady] = useState(false)
+  useEffect(() => {
+    if (!map.getPane('tour-markers')) {
+      map.createPane('tour-markers').style.zIndex = 620
+    }
+    setReady(true)
+  }, [map])
+  return ready ? children : null
 }
 
 function FitToSelection({ routes, selected }) {
@@ -40,6 +56,7 @@ export default function TourMap({ routes, selected, onSelect }) {
     () => (routes ? [...routes.features].sort((a, b) => a.properties.day - b.properties.day) : []),
     [routes],
   )
+  const markerRenderer = useMemo(() => L.canvas({ pane: 'tour-markers' }), [])
 
   return (
     <div className="map-wrap">
@@ -93,6 +110,7 @@ export default function TourMap({ routes, selected, onSelect }) {
           )
         })}
 
+        <MarkerPane>
         {stats.map((d) => {
           const active = selected == null || selected === d.day
           if (!active) return null
@@ -107,6 +125,8 @@ export default function TourMap({ routes, selected, onSelect }) {
                   // key includes `labelled` so the permanent tooltip remounts on toggle
                   key={`${d.day}-${m.name}-${m.kind}-${labelled}`}
                   center={[m.lat, m.lon]}
+                  pane="tour-markers"
+                  renderer={markerRenderer}
                   radius={isEndpoint ? 7 : m.kind === 'via' ? 5 : 4.5}
                   pathOptions={
                     m.kind === 'poi'
@@ -135,6 +155,7 @@ export default function TourMap({ routes, selected, onSelect }) {
               )
             })
         })}
+        </MarkerPane>
       </MapContainer>
 
       {selected != null && (

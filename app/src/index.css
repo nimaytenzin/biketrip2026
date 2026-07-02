@@ -337,7 +337,7 @@ h2 {
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 14px;
 }
 
@@ -536,6 +536,99 @@ h2 {
   font-size: 12px;
   line-height: 1.6;
   color: var(--muted);
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 640px) {
+  .page {
+    padding: 0 14px 36px;
+  }
+
+  .hero {
+    padding: 36px 0 24px;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .kpi {
+    padding: 12px 14px;
+  }
+
+  .kpi strong {
+    font-size: 21px;
+  }
+
+  .kpi span {
+    font-size: 11.5px;
+  }
+
+  .map {
+    height: 64vh;
+  }
+
+  /* day chips become a horizontal scroll strip along the top edge */
+  .map-legend {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+
+  .map-legend::-webkit-scrollbar {
+    display: none;
+  }
+
+  .day-chip {
+    flex: none;
+  }
+
+  /* day panel becomes a bottom sheet */
+  .day-panel {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: auto;
+    max-height: 52%;
+    border-radius: 14px 14px 0 0;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    animation: panel-up 0.25s ease-out;
+  }
+
+  .day-figures {
+    gap: 16px;
+  }
+
+  .days-section,
+  .table-section {
+    margin-top: 40px;
+  }
+}
+
+@keyframes panel-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* leaflet chrome */
