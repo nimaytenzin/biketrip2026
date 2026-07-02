@@ -54,6 +54,20 @@
     "off_km": 0.3
    },
    {
+    "name": "Chendebji Chorten",
+    "lon": 90.35878,
+    "lat": 27.46068,
+    "kind": "poi",
+    "off_km": 4.9
+   },
+   {
+    "name": "Tsheringma Drupchhu (Zalamchu)",
+    "lon": 90.42059,
+    "lat": 27.44821,
+    "kind": "poi",
+    "off_km": 1.3
+   },
+   {
     "name": "Yotong La",
     "lon": 90.63921,
     "lat": 27.50183,
@@ -140,6 +154,13 @@
     "lat": 27.34496,
     "kind": "poi",
     "off_km": 0.1
+   },
+   {
+    "name": "Namling Brak & Waterfall",
+    "lon": 91.16269,
+    "lat": 27.30854,
+    "kind": "poi",
+    "off_km": 1.5
    }
   ],
   "class_km": {
